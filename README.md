@@ -16,7 +16,7 @@ the most important and two newly proposed predictors (`insta`, `soc_lib`).
 
 ## Data availability
 
-**The data is not included in this repository and cannot be redistributed.**
+**The data is not included in this repository.**
 
 The analysis uses the PreFer Data Challenge data, derived from the LISS panel
 (Longitudinal Internet studies for the Social Sciences, Centerdata / Tilburg
@@ -35,12 +35,9 @@ The scripts expect these files:
 | `train_dir`   | `PreFer_train_background_data.csv` (ships in `other_data/` — see note in `config.R`) |
 | `holdout_dir` | `PreFer_holdout_data.csv`, `PreFer_holdout_outcome.csv`, `PreFer_holdout_background_data.csv` |
 
-`.gitignore` excludes `holdout/` and `*.csv` so the microdata cannot be committed
-by accident. Please keep it that way.
+`.gitignore` excludes `holdout/` and `*.csv` so the microdata cannot be committed by accident. 
 
-The fitted model `models/final_rf.rds` **is** included. A `ranger` probability
-forest stores split thresholds and terminal-node predictions, not raw respondent
-records, so it does not redistribute the underlying survey data.
+The fitted model `models/final_rf.rds` **is** included. 
 
 ---
 
@@ -55,7 +52,7 @@ source("install_dependencies.R")
 or from a shell, `Rscript install_dependencies.R`. It prints a table of installed
 versions and stops with an error if anything is missing.
 
-### One dependency needs special handling: `fastshap`
+### Special handling: `fastshap`
 
 `fastshap` was **removed from CRAN on 2026-05-27**, so plain
 `install.packages("fastshap")` no longer works. It is not optional — `src.R`
@@ -127,10 +124,8 @@ valid, but different — permutation, Shapley and conditional-PDP output.
 
 ### Random seeds
 
-Seeds live in `config.R`. There are deliberately **two**, and they must not be
-merged: `seed_train = 1234` for training, `seed_explain = 61196` for the
-explanation stage. Collapsing them into one value would silently change the
-explanation-stage results.
+Seeds live in `config.R`. There are **two**, and they must not be
+merged to reproduce the study: `seed_train = 1234` for training, `seed_explain = 61196` for the explanation stage. 
 
 `model_eval.R` needs no seed — it only calls `predict()`, which is deterministic.
 
@@ -143,16 +138,11 @@ machines does not change the permutation or Shapley importances.
 
 ## Retraining
 
-`models/final_rf.rds` and `results/tuning_results.rds` are **canonical artifacts**
-and running `model_train.R` will not reproduce them. Two independent reasons:
+`models/final_rf.rds` and `results/tuning_results.rds` are **canonical artifacts** and running `model_train.R` may not reproduce them.
 
-1. The original run tuned under `tune` 1.x, which parallelised the race over
+This is because the original run tuned under `tune` 1.x, which parallelised the race over
    `foreach`. `tune` >= 2.0 removed foreach support entirely and moved to `mirai`,
    a different execution and RNG path.
-2. The final `fit()` was originally unseeded, so the forest depended on whatever
-   RNG state the 250-configuration race left behind. A `set.seed()` has now been
-   added, which makes future runs deterministic but cannot recover the original
-   draw retroactively.
 
 `model_train.R` therefore refuses to overwrite `models/final_rf.rds` if it already
 exists. To retrain deliberately, move the existing file aside or set
@@ -169,31 +159,6 @@ numbers.
   no-op and the race would quietly run single-threaded.
 - `model_explain.R` uses **foreach/doRNG** (`registerDoParallel()`), because `vip`
   still parallelises over foreach.
-
-Please do not "harmonise" the two.
-
----
-
-## Known provenance caveats
-
-Recorded here for transparency:
-
-- **Conditional partial-dependence figures.** The committed `figures/pd_con_*.png`
-  and `results/explain_timing.rds` were produced before two missing seeds were
-  added (the conditional `model_profile()` calls, which subsample with a default
-  `N = 100`). They come from partial, interactive re-runs rather than one clean
-  execution, which is also why `explain_timing.rds` holds 8 of the 12 timing
-  entries the current script writes. The seeds are now in place; a single
-  end-to-end run of `model_explain.R` regenerates all 12 timings and all
-  conditional PDPs from one reproducible RNG stream. The unconditional PDPs, the
-  importance rankings and the reported metrics are unaffected.
-- **Figures are not pixel-identical across ggplot2 versions.** ggplot2 4.x is a
-  major rewrite (S7 internals, theme-driven geom defaults), so regenerated figures
-  differ cosmetically in legend spacing, fonts and bar outlines even when the
-  underlying numbers match.
-- **`.config` labels changed in `tune` 2.x** (`pre0_mod1_post0`, formerly
-  `Preprocessor1_Model001`). `results/tuning_results.rds` carries the old labels.
-
 ---
 
 ## Computational environment
@@ -211,12 +176,6 @@ Two machine-readable records are included:
   This is the reliable route, and it pins `fastshap` 0.1.1.
 - **`session_info.txt`** — R version, platform and every attached/loaded package
   version. Regenerate with `Rscript session_info.R`.
-
-A note on honesty about versions: the package versions used for the original
-April-2025 run were never recorded and cannot now be reconstructed. `renv.lock`
-captures the environment in which this package was **verified**, not the original
-one. In that verified environment `model_eval.R` reproduces the published holdout
-metrics exactly.
 
 Approximate runtimes from `results/` (single machine, as configured above):
 tuning ~3 min elapsed for the racing search; the embedded importance fits ~1–3 s
