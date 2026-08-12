@@ -1,0 +1,128 @@
+Computational environment for:
+Opening the Baby Black Box: Explainability in Fertility Prediction from Classical Predictors to Social Media Use and Political Orientation
+G. Tedesco, B. Arpino
+
+Recorded: 2026-08-12 12:46:08 CEST
+Working directory: /Users/gaetanotedesco/Desktop/RESEARCH/baby-black-box
+
+─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.6.1 (2026-06-24)
+ os       macOS Tahoe 26.5.2
+ system   aarch64, darwin23
+ ui       X11
+ language (EN)
+ collate  C.UTF-8
+ ctype    C.UTF-8
+ tz       Europe/Copenhagen
+ date     2026-08-12
+ pandoc   3.10 @ /opt/homebrew/bin/pandoc
+ quarto   NA
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package      * version    date (UTC) lib source
+ backports      1.5.1      2026-04-03 [1] CRAN (R 4.6.0)
+ broom        * 1.0.13     2026-05-14 [1] CRAN (R 4.6.0)
+ bundle       * 0.1.3      2025-12-10 [1] CRAN (R 4.6.0)
+ butcher      * 0.4.0      2025-12-09 [1] CRAN (R 4.6.0)
+ checkmate      2.3.4      2026-02-03 [1] CRAN (R 4.6.0)
+ class          7.3-23     2025-01-01 [1] CRAN (R 4.6.1)
+ cli            3.6.6      2026-04-09 [1] CRAN (R 4.6.0)
+ codetools      0.2-20     2024-03-31 [1] CRAN (R 4.6.1)
+ DALEX        * 2.5.4      2026-07-15 [1] CRAN (R 4.6.1)
+ DALEXtra     * 2.3.1      2026-01-14 [1] CRAN (R 4.6.0)
+ data.table   * 1.18.4     2026-05-06 [1] CRAN (R 4.6.0)
+ dials        * 1.4.3      2026-04-11 [1] CRAN (R 4.6.0)
+ DiceDesign     1.10       2023-12-07 [1] CRAN (R 4.6.0)
+ digest         0.6.39     2025-11-19 [1] CRAN (R 4.6.0)
+ doParallel   * 1.0.17     2022-02-07 [1] CRAN (R 4.6.0)
+ doRNG        * 1.8.6.3    2026-02-05 [1] CRAN (R 4.6.0)
+ dplyr        * 1.2.1      2026-04-03 [1] CRAN (R 4.6.0)
+ farver         2.1.2      2024-05-13 [1] CRAN (R 4.6.0)
+ fastshap     * 0.1.1      2024-02-22 [1] RSPM (R 4.6.0)
+ finetune     * 1.3.0      2026-04-18 [1] CRAN (R 4.6.0)
+ forcats      * 1.0.1      2025-09-25 [1] CRAN (R 4.6.0)
+ foreach      * 1.5.2      2022-02-02 [1] CRAN (R 4.6.0)
+ furrr          0.4.0      2026-03-31 [1] CRAN (R 4.6.0)
+ future         1.70.0     2026-03-14 [1] CRAN (R 4.6.0)
+ future.apply   1.20.2     2026-02-20 [1] CRAN (R 4.6.0)
+ generics       0.1.4      2025-05-09 [1] CRAN (R 4.6.0)
+ ggplot2      * 4.0.3      2026-04-22 [1] CRAN (R 4.6.0)
+ globals        0.19.1     2026-03-13 [1] CRAN (R 4.6.0)
+ glue           1.8.1      2026-04-17 [1] CRAN (R 4.6.0)
+ gower          1.0.2      2024-12-17 [1] CRAN (R 4.6.0)
+ gtable         0.3.6      2024-10-25 [1] CRAN (R 4.6.0)
+ hardhat        1.4.3      2026-04-04 [1] CRAN (R 4.6.0)
+ hms            1.1.4      2025-10-17 [1] CRAN (R 4.6.0)
+ iml          * 0.11.4     2025-02-24 [1] CRAN (R 4.6.0)
+ infer        * 1.1.0      2025-12-18 [1] CRAN (R 4.6.0)
+ ipred          0.9-15     2024-07-18 [1] CRAN (R 4.6.0)
+ iterators    * 1.0.14     2022-02-05 [1] CRAN (R 4.6.0)
+ jsonlite       2.0.0      2025-03-27 [1] CRAN (R 4.6.0)
+ lattice        0.22-9     2026-02-09 [1] CRAN (R 4.6.1)
+ lava           1.9.1      2026-05-14 [1] CRAN (R 4.6.0)
+ lifecycle      1.0.5      2026-01-08 [1] CRAN (R 4.6.0)
+ listenv        0.10.1     2026-03-10 [1] CRAN (R 4.6.0)
+ lubridate    * 1.9.5      2026-02-04 [1] CRAN (R 4.6.0)
+ magrittr       2.0.5      2026-04-04 [1] CRAN (R 4.6.0)
+ MASS           7.3-65     2025-02-28 [1] CRAN (R 4.6.1)
+ Matrix         1.7-5      2026-03-21 [1] CRAN (R 4.6.1)
+ Metrics        0.1.4      2018-07-09 [1] CRAN (R 4.6.0)
+ modeldata    * 1.5.1      2025-08-22 [1] CRAN (R 4.6.0)
+ nnet           7.3-20     2025-01-01 [1] CRAN (R 4.6.1)
+ parallelly     1.47.0     2026-04-17 [1] CRAN (R 4.6.0)
+ parsnip      * 1.6.0      2026-05-14 [1] CRAN (R 4.6.0)
+ patchwork    * 1.3.2      2025-08-25 [1] CRAN (R 4.6.0)
+ pdp          * 0.8.3      2026-01-23 [1] CRAN (R 4.6.0)
+ pillar         1.11.1     2025-09-17 [1] CRAN (R 4.6.0)
+ pkgconfig      2.0.3      2019-09-22 [1] CRAN (R 4.6.0)
+ prodlim        2026.03.11 2026-03-11 [1] CRAN (R 4.6.0)
+ purrr        * 1.2.2      2026-04-10 [1] CRAN (R 4.6.0)
+ R6             2.6.1      2025-02-15 [1] CRAN (R 4.6.0)
+ ranger       * 0.18.0     2026-01-16 [1] CRAN (R 4.6.0)
+ RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
+ Rcpp           1.1.1-1.1  2026-04-24 [1] CRAN (R 4.6.0)
+ readr        * 2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
+ recipes      * 1.3.3      2026-05-30 [1] CRAN (R 4.6.0)
+ rlang          1.2.0      2026-04-06 [1] CRAN (R 4.6.0)
+ rngtools     * 1.5.2      2021-09-20 [1] CRAN (R 4.6.0)
+ rpart          4.1.27     2026-03-27 [1] CRAN (R 4.6.1)
+ rsample      * 1.3.2      2026-01-30 [1] CRAN (R 4.6.0)
+ rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)
+ S7             0.2.2      2026-04-22 [1] CRAN (R 4.6.0)
+ scales       * 1.4.0      2025-04-24 [1] CRAN (R 4.6.0)
+ sessioninfo    1.2.4      2026-06-04 [1] CRAN (R 4.6.0)
+ shapviz      * 0.10.3     2025-10-13 [1] CRAN (R 4.6.0)
+ stringi        1.8.7      2025-03-27 [1] CRAN (R 4.6.0)
+ stringr      * 1.6.0      2025-11-04 [1] CRAN (R 4.6.0)
+ survival       3.8-6      2026-01-16 [1] CRAN (R 4.6.1)
+ tailor       * 0.1.0      2025-08-25 [1] CRAN (R 4.6.0)
+ tibble       * 3.3.1      2026-01-11 [1] CRAN (R 4.6.0)
+ tidymodels   * 1.5.0      2026-04-23 [1] CRAN (R 4.6.0)
+ tidyr        * 1.3.2      2025-12-19 [1] CRAN (R 4.6.0)
+ tidyselect     1.2.1      2024-03-11 [1] CRAN (R 4.6.0)
+ tidyverse    * 2.0.0      2023-02-22 [1] CRAN (R 4.6.0)
+ timechange     0.4.0      2026-01-29 [1] CRAN (R 4.6.0)
+ timeDate       4052.112   2026-01-28 [1] CRAN (R 4.6.0)
+ tune         * 2.1.0      2026-04-17 [1] CRAN (R 4.6.0)
+ tzdb           0.5.0      2025-03-15 [1] CRAN (R 4.6.0)
+ vctrs          0.7.3      2026-04-11 [1] CRAN (R 4.6.0)
+ vip          * 0.4.6      2026-04-23 [1] CRAN (R 4.6.0)
+ withr          3.0.3      2026-06-19 [1] CRAN (R 4.6.0)
+ workflows    * 1.3.0      2025-08-27 [1] CRAN (R 4.6.0)
+ workflowsets * 1.1.1      2025-05-27 [1] CRAN (R 4.6.0)
+ xgboost        3.2.1.1    2026-03-18 [1] CRAN (R 4.6.0)
+ yardstick    * 1.4.0      2026-04-07 [1] CRAN (R 4.6.0)
+
+ [1] /Library/Frameworks/R.framework/Versions/4.6/Resources/library
+ * ── Packages attached to the search path.
+
+──────────────────────────────────────────────────────────────────────────────
+
+-- Hardware -------------------------------------------------------------------
+ Model                  Mac15,10
+ CPU                    Apple M3 Max
+ CPU cores (detected)   14
+ RAM                    36 GB
+ Platform               aarch64-apple-darwin23
+ OS                     Darwin 25.5.0

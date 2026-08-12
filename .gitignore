@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# PreFer / LISS microdata is NOT redistributable.
+# See the "Data availability" section of README.md.
+holdout/
+*.csv
+
+# R
+.Rhistory
+.Rapp.history
+.RData
+.Rdata
+.Ruserdata
+.Rproj.user/
+*.Rproj
+
+# renv library 
+renv/library/
+renv/local/
+renv/staging/
+renv/python/
+renv/sandbox/
