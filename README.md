@@ -182,3 +182,12 @@ tuning ~3 min elapsed for the racing search; the embedded importance fits ~1–3
 each; FIRM ~21 s; permutation and Shapley importance ~28–45 s each; full two-way
 interaction strengths ~2 min; per-predictor interaction strengths ~7 min.
 
+---
+
+## License
+
+The code in this repository is released under the [MIT License](LICENSE).
+The PreFer / LISS microdata is **not** part of this repository and is not
+covered by this license — it remains subject to the Centerdata / LISS data
+agreement (see *Data availability*).
+
