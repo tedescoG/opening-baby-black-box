@@ -19,10 +19,9 @@ if (
 # Data location --------------------------------------------------------------
 # EDIT THESE TWO PATHS.
 #
-# The PreFer / LISS microdata is NOT redistributable and is therefore NOT
-# included in this repository. See the "Data availability" section of README.md
-# for how to obtain it. Point the two variables below at the directories holding
-# your own copy.
+# The PreFer / LISS microdata is NOT included in this repository.
+# See the "Data availability" section of README.md for how to obtain it.
+# Point the two variables below at the directories holding your own copy.
 train_dir <- "~/path/to/PreFer/training_data"
 holdout_dir <- "~/path/to/PreFer/holdout_data"
 
@@ -41,10 +40,8 @@ model_dir <- "models/" # the bundled random forest (.rds)
 figure_dir <- "figures/" # variable-importance and dependence plots (.png)
 
 # Random seeds ---------------------------------------------------------------
-# These two seeds differ, and that is intentional: the published results were
-# produced with 1234 for training and 61196 for the explanation stage. Do NOT
-# collapse them into a single value — that would silently change the
-# explanation-stage output.
+# The published results were produced with 1234 for training and 61196 for the explanation stage.
+# Keep the values for reproducing the results
 seed_train <- 1234 # resampling, tuning grid, race, final fit
 seed_explain <- 61196 # variable importance, PDPs, interaction strengths
 
