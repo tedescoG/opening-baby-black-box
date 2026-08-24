@@ -1,10 +1,4 @@
 # SCRIPT SETUP -------------------------------------------------------------####
-#
-# NOTE ON REPRODUCIBILITY: running this script might not reproduce the published
-# model. models/final_rf.rds and results/tuning_results.rds were produced under
-# an earlier version of the tidymodels stack (tune 1.x, which parallelised the
-# race over foreach) and are shipped as artifacts.
-# See the "Retraining" section of README.md
 
 # Paths, seeds and output directories. Edit config.R, not this file.
 source("config.R")
@@ -17,10 +11,7 @@ run <- seed_train
 
 # Output path for the fitted model, checked up front.
 #
-# Refuse to silently overwrite the published model: a retrained forest will not
-# match it, so replacing it would invalidate the shipped results and figures
-# without leaving any trace. Checked here rather than at the save step so you
-# find out now, not after several hours of tuning.
+# Refuse to overwrite the published model. See README.md for details
 model_pathname <- paste0(model_dir, "final_rf.rds")
 
 if (
